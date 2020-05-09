@@ -110,7 +110,6 @@ func (d *Dispatcher) RemoveEventListener(eventName string, callback *EventCallba
 	if exist {
 		//fmt.Printf("remove listener: %s\n", eventName)
 		//fmt.Println("chan: ", ch)
-		//noinspection GoNilness
 		ch <- nil
 
 		eventChain.chs = append(eventChain.chs[:key], eventChain.chs[key+1:]...)
