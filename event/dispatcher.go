@@ -1,4 +1,4 @@
-package myevent
+package event
 
 // 事件
 type Event struct {
