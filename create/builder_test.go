@@ -3,11 +3,17 @@ package create
 import "testing"
 
 func Test_Builder(t *testing.T) {
-	assembly := NewCarBuilder().Color(RedColor)
+	carBuilder := NewCarBuilder()
 
-	familyCar := assembly.Wheels(SteelWheels).TopSpeed(50 * MPH).Build()
-	familyCar.Drive()
+	familyCar, err := carBuilder.Color(BlackColor).Wheels(SteelWheels).TopSpeed(50 * MPH).Build()
+	if err != nil {
+		t.Fail()
+	}
+	_ = familyCar.Drive()
 
-	sportsCar := assembly.Wheels(SportsWheels).TopSpeed(150 * MPH).Build()
-	sportsCar.Drive()
+	sportsCar, err := carBuilder.Color(RedColor).Wheels(SportsWheels).TopSpeed(150 * MPH).Build()
+	if err != nil {
+		t.Fail()
+	}
+	_ = sportsCar.Drive()
 }

@@ -1,6 +1,9 @@
 package create
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Speed float64
 
@@ -12,9 +15,11 @@ const (
 type Color string
 
 const (
-	BlueColor  Color = "blue"
+	NoColor    Color = ""
+	BlueColor        = "blue"
 	GreenColor       = "green"
 	RedColor         = "red"
+	BlackColor       = "black"
 )
 
 type Wheels string
@@ -28,7 +33,7 @@ type CarBuilder interface {
 	Color(Color) CarBuilder
 	Wheels(Wheels) CarBuilder
 	TopSpeed(Speed) CarBuilder
-	Build() Driver
+	Build() (Driver, error)
 }
 
 type Driver interface {
@@ -68,10 +73,14 @@ func (c *Car) TopSpeed(speed Speed) CarBuilder {
 	return c
 }
 
-func (c *Car) Build() Driver {
-	return c
+func (c *Car) Build() (Driver, error) {
+	// 判断必填参数，在参数过多时候，防止用户少传参数
+	if c.color == NoColor {
+		return nil, errors.New("color is empty")
+	}
+	return c, nil
 }
 
 func NewCarBuilder() CarBuilder {
-	return &Car{}
+	return &Car{color: NoColor}
 }
