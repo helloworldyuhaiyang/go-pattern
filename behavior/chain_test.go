@@ -9,6 +9,7 @@ import (
 func ParamHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("params handler")
+		// 不调用 h.ServeHTTP 则不向后传递
 		h.ServeHTTP(w, r)
 	})
 }

@@ -28,10 +28,12 @@ func NewMiddlewareHandlers() *MiddlewareHandlers {
 	}
 }
 
+// 添加 handler
 func (hm *MiddlewareHandlers) AddHandler(h MiddlewareHandler) {
 	hm.hs = append(hm.hs, h)
 }
 
+// 运行 http 服务
 func (hm *MiddlewareHandlers) Run(address string) error {
 	r := mux.NewRouter()
 	r.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
