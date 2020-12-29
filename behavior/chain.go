@@ -14,7 +14,7 @@ import (
 // Its the responsibility of the MiddlewareHandler to call the next http.MiddlewareHandler in the chain.
 type MiddlewareHandler func(http.Handler) http.Handler
 
-// 关联链的
+// 管理 handler 的
 type MiddlewareHandlers struct {
 	mux *http.ServeMux
 

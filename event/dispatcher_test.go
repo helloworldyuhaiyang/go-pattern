@@ -2,11 +2,11 @@ package event
 
 import (
 	"fmt"
-	"github.com/iothink/dp-service/protocol/dp"
 	"testing"
 	"time"
 )
 
+// 关注 dpChange 类型的观察者
 type DpChangeListener struct {
 }
 
@@ -18,13 +18,14 @@ func (d *DpChangeListener) Handle(event *Event) {
 	fmt.Println("recv event", event)
 }
 
+// 单测代码
 func TestDispatcher_DispatchEvent(t *testing.T) {
 	disPatcher := NewDisPatcher(10)
 	disPatcher.AddListener("dpChange", NewDpChangeListener())
 
 	parameters := make(map[string]interface{})
 	parameters["deviceId"] = "dev1234"
-	parameters["dp"], _ = dp.NewInt8Dp(1, 123)
+	parameters["dpVal"] = "123"
 	event := &Event{
 		Name:       "dpChange",
 		Parameters: parameters,

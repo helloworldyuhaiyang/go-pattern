@@ -1,17 +1,17 @@
 package event
 
-// 事件
+// 事件 Name 用户过滤事件
 type Event struct {
 	Name       string
 	Parameters map[string]interface{}
 }
 
-// 事件监听者
+// 事件观察者需要实现此接口。当有观察者想要的消息的时候通知
 type Listener interface {
 	Handle(event *Event)
 }
 
-// 带有 ch 的 listener
+// 把用户的 listener 包装为带有 ch 的 listener
 type ListenerWithCh struct {
 	listener Listener
 	ch       chan *Event
