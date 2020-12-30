@@ -15,26 +15,26 @@ import (
 type MiddlewareHandler func(http.Handler) http.Handler
 
 // 管理 handler 的
-type MiddlewareHandlers struct {
+type MyHttp struct {
 	mux *http.ServeMux
 
 	hs []MiddlewareHandler
 }
 
-func NewMiddlewareHandlers() *MiddlewareHandlers {
-	return &MiddlewareHandlers{
+func NewMyHttp() *MyHttp {
+	return &MyHttp{
 		hs:  make([]MiddlewareHandler, 0),
 		mux: http.NewServeMux(),
 	}
 }
 
 // 添加 handler
-func (hm *MiddlewareHandlers) AddHandler(h MiddlewareHandler) {
+func (hm *MyHttp) AddHandler(h MiddlewareHandler) {
 	hm.hs = append(hm.hs, h)
 }
 
 // 运行 http 服务
-func (hm *MiddlewareHandlers) Run(address string) error {
+func (hm *MyHttp) Run(address string) error {
 	r := mux.NewRouter()
 	r.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		rspData := "not found"

@@ -22,7 +22,7 @@ func SignHandler(h http.Handler) http.Handler {
 }
 
 func TestMiddlewareHandlers_Run(t *testing.T) {
-	handlers := NewMiddlewareHandlers()
+	handlers := NewMyHttp()
 	handlers.AddHandler(ParamHandler)
 	handlers.AddHandler(SignHandler)
 
